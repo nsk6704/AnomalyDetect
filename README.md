@@ -1,6 +1,5 @@
 <!-- markdownlint-disable-next-line -->
 <p align="center">
-  <img src="" alt="AnomalyDetect" width="120" />
   <br />
   <h1>AnomalyDetect</h1>
   <p>High-Performance Anomaly Detection Framework</p>
