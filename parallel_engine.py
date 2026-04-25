@@ -45,18 +45,41 @@ def train_worker(rank, config, return_dict, status_queue):
     # Initialize model
     model = get_model(model_name, seq_len, n_features)
     
-    # Train
+    # Train with Fallback Logic
     try:
-        start_time = time.time()
-        state_dict, history = train_model(
-            model, 
-            train_loader, 
-            val_loader, 
-            epochs=epochs, 
-            device=device, 
-            model_name=f"W-{rank}-{model_name}",
-            use_amp=use_amp
-        )
+        try:
+            start_time = time.time()
+            state_dict, history = train_model(
+                model, 
+                train_loader, 
+                val_loader, 
+                epochs=epochs, 
+                device=device, 
+                model_name=f"W-{rank}-{model_name}",
+                use_amp=use_amp
+            )
+        except Exception as e:
+            if device == 'cpu':
+                raise e # Already on CPU, cannot fallback
+            
+            # Fallback to CPU
+            print(f"Worker {rank} ({model_name}) failed on {device}. Retrying on CPU... Error: {str(e)}")
+            model = model.to('cpu')
+            device = 'cpu'
+            # Disable AMP for CPU fallback
+            use_amp = False 
+            
+            start_time = time.time() # Reset timer
+            state_dict, history = train_model(
+                model, 
+                train_loader, 
+                val_loader, 
+                epochs=epochs, 
+                device='cpu', 
+                model_name=f"W-{rank}-{model_name}-CPU",
+                use_amp=False
+            )
+        
         end_time = time.time()
         duration = end_time - start_time
         
