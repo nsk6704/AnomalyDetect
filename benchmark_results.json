@@ -8,48 +8,48 @@
         {
             "device": "cpu",
             "batch_size": 128,
-            "avg_throughput": 573.2528142248709,
-            "total_time": 17.711190700531006,
+            "avg_throughput": 588.6983041977262,
+            "total_time": 17.273478984832764,
             "max_memory": 0.0,
             "use_amp": false
         },
         {
             "device": "cpu",
             "batch_size": 512,
-            "avg_throughput": 557.7416484660591,
-            "total_time": 18.230483293533325,
+            "avg_throughput": 562.2363190972221,
+            "total_time": 18.08476495742798,
             "max_memory": 0.0,
             "use_amp": false
         },
         {
             "device": "cpu",
             "batch_size": 1024,
-            "avg_throughput": 502.3648609750902,
-            "total_time": 20.183252334594727,
+            "avg_throughput": 520.8812414752576,
+            "total_time": 19.500553846359253,
             "max_memory": 0.0,
             "use_amp": false
         },
         {
             "device": "dml",
             "batch_size": 128,
-            "avg_throughput": 935.4249882627266,
-            "total_time": 10.951619386672974,
+            "avg_throughput": 1119.4381856867262,
+            "total_time": 9.120683193206787,
             "max_memory": 0.0,
             "use_amp": false
         },
         {
             "device": "dml",
             "batch_size": 512,
-            "avg_throughput": 1116.870237090982,
-            "total_time": 9.17362356185913,
+            "avg_throughput": 1141.8912675340137,
+            "total_time": 9.02794599533081,
             "max_memory": 0.0,
             "use_amp": false
         },
         {
             "device": "dml",
             "batch_size": 1024,
-            "avg_throughput": 883.6138607573424,
-            "total_time": 12.552149295806885,
+            "avg_throughput": 942.5210053581759,
+            "total_time": 12.217986822128296,
             "max_memory": 0.0,
             "use_amp": false
         }
