@@ -44,12 +44,15 @@ class EnsemblePredictor:
             
             # Normalize scores to [0, 1] range for each model to ensure fair voting
             # Simple Min-Max scaling based on batch statistics
-            min_score = scores.min()
-            max_score = scores.max()
-            if max_score > min_score:
-                scores = (scores - min_score) / (max_score - min_score)
+            # Standardize scores (Z-Score) instead of Min-Max
+            # Min-Max is sensitive to outliers and fails if batch has little variance
+            mean_score = scores.mean()
+            std_score = scores.std()
+            
+            if std_score > 0:
+                scores = (scores - mean_score) / std_score
             else:
-                scores = np.zeros_like(scores)
+                scores = scores - mean_score # Center at 0 if no variance
                 
             all_scores.append(scores)
             
